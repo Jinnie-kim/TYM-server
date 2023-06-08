@@ -2,11 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const SpotifyWebApi = require('spotify-web-api-node');
 const bodyParser = require('body-parser');
+const port = process.env.PORT || 5174;
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+  res.send('serving listening server...💫');
+});
 
 app.post('/loading', function (req, res) {
   const code = req.body.code;
@@ -33,4 +38,4 @@ app.post('/loading', function (req, res) {
     });
 });
 
-app.listen(5174);
+app.listen(port);
