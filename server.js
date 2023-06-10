@@ -6,14 +6,20 @@ const port = process.env.PORT || 5174;
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: ['http://127.0.0.1:5173', 'https://track-your-music.vercel.app'],
+  })
+);
+
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('serving listening server...💫');
 });
 
-app.post('/loading', function (req, res) {
+app.post('/gettoken', function (req, res) {
   const code = req.body.code;
 
   const spotifyApi = new SpotifyWebApi({
